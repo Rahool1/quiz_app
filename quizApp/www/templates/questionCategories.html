@@ -1,9 +1,15 @@
 <ion-view view-title="Categories">
   <ion-content>
     <ion-list>
-      <ion-item ng-repeat="cat in QueCategoryList" href="#/app/questions/{{cat.id}}">
-        {{cat.title}}
+    <div ng-repeat="cat in QueCategoryList">
+      <ion-item class="item item-divider item-calm">
+        {{cat.divisionName}}
       </ion-item>
+      <ion-item class="item-icon-right" ng-repeat="subCat in cat.category" href="#/app/questions/{{subCat.id}}">
+        {{subCat.title}}
+        <i class="icon ion-chevron-right icon-accessory"></i>
+      </ion-item>
+    </div>
     </ion-list>
   </ion-content>
 </ion-view>

@@ -41,13 +41,70 @@ angular.module('quizApp.controllers', [])
   };
 })
 
-.controller('QuestionCateGoryCtrl', function($scope,questionCategoryListApi) {
+.controller('QuestionCategoryCtrl', function($scope,questionCategoryListApi) {
 
   $scope.QueCategoryList = questionCategoryListApi.getQueCatList;
 
 
 })
 
-.controller('PlaylistCtrl', function($scope, $stateParams) {
+.controller('QuestionCtrl', function($scope, $stateParams, questionListApi, $ionicSlideBoxDelegate, $ionicPopup, $timeout) {
+  $scope.correctAns = false;
+  $scope.wrongAns = false;
 
+  $scope.currentPage = 0;
+  $scope.pageSize = 10;
+
+  $scope.data = {
+    selected: null
+  };
+
+  $scope.questionData = questionListApi.getQuestionListData($stateParams.categoryId);
+  console.log("data");
+  console.log($scope.questionData);
+
+  $scope.numberOfPages=function(){
+    return Math.ceil($scope.questionData.length/$scope.pageSize);
+  }
+
+  console.log(Math.ceil($scope.questionData.length/$scope.pageSize));
+
+  $scope.radioButtonIsSelected = function(option,que) {
+    // console.log("options");
+    console.log(que);
+    console.log(option);
+    console.log(que.ans);
+
+
+    if(option.opt != que.ans){
+      $scope.showAlert(que.ans);
+      // for(var i = 0; i < que.optionsList.length; i++){
+
+      // }
+    }
+
+  };
+
+  $scope.showAlert = function(ans) {
+    var alertPopup = $ionicPopup.alert({
+      title: 'Answer',
+      template: ans
+    });
+    alertPopup.then(function(res) {
+      //call back finction
+    });
+
+    $timeout(function() {
+      alertPopup.close();
+    }, 1500);
+
+  };
+
+}).
+filter('startFrom', function() {
+    return function(input, start) {
+        if (!input || !input.length) { return; }
+        start = +start; //parse to int
+        return input.slice(start);
+    };
 });

@@ -52,7 +52,7 @@ angular.module('quizApp', ['ionic', 'quizApp.controllers'])
     views: {
       'menuContent': {
         templateUrl: "templates/questionCategories.html",
-        controller: 'QuestionCateGoryCtrl'
+        controller: 'QuestionCategoryCtrl'
       }
     }
   })
@@ -61,8 +61,8 @@ angular.module('quizApp', ['ionic', 'quizApp.controllers'])
     url: "/questions/:categoryId",
     views: {
       'menuContent': {
-        templateUrl: "templates/playlist.html",
-        controller: 'PlaylistCtrl'
+        templateUrl: "templates/questionPage.html",
+        controller: 'QuestionCtrl'
       }
     }
   });
