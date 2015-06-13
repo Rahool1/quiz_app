@@ -96,9 +96,35 @@ angular.module('quizApp.controllers', [])
 
     $timeout(function() {
       alertPopup.close();
-    }, 1500);
+    }, 1200);
 
   };
+
+})
+.controller('TestCtrl', function($scope, questionCategoryListApi, $timeout) {
+
+  // $scope.ss = 0;
+  // $scope.mm = 0;
+
+  // $scope.onTimeout = function(){
+  //     $scope.counter++;
+  //     mytimeout = $timeout($scope.onTimeout,1000);
+  // }
+  // var mytimeout = $timeout($scope.onTimeout,1000);
+
+  $scope.clock = "loading clock..."; // initialise the time variable
+    $scope.tickInterval = 1000 //ms
+
+    var tick = function() {
+        $scope.clock = Date.now() // get the current time
+        $timeout(tick, $scope.tickInterval); // reset the timer
+    }
+
+    // Start the timer
+    $timeout(tick, $scope.tickInterval);
+
+  $scope.QueCategoryListForTest = questionCategoryListApi.getQueCatList;
+
 
 }).
 filter('startFrom', function() {

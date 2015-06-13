@@ -1,1 +1,44 @@
 /* Empty. Add your own CSS if you like */
+.popup{
+
+}
+
+.popup-head{
+    background-color: red;
+}
+
+.popup-title{
+    color: #FFF;
+    font-weight: bold;
+    text-align: center;
+}
+
+.popup-sub-title{
+
+}
+
+.popup-body{
+    background-color: #EEE;
+    color: green;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.popup-buttons.row{
+
+}
+
+.popup-buttons .button{
+    background-color: #FFF;
+    color:#000;
+    font-weight: bold;
+}
+
+.popup-buttons .button:hover{
+    background-color: #EEE;
+    font-weight: bold;
+    color:#000;
+    border: 1px solid green;
+}
+
+/* ------------------ pop up ends---------------- */

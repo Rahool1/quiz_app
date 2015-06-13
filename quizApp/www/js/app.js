@@ -30,11 +30,12 @@ angular.module('quizApp', ['ionic', 'quizApp.controllers'])
     controller: 'quizCtrl'
   })
 
-  .state('app.search', {
-    url: "/search",
+  .state('app.test', {
+    url: "/test",
     views: {
       'menuContent': {
-        templateUrl: "templates/search.html"
+        templateUrl: "templates/testCategory.html",
+        controller: 'TestCtrl'
       }
     }
   })
@@ -48,7 +49,7 @@ angular.module('quizApp', ['ionic', 'quizApp.controllers'])
     }
   })
   .state('app.playlists', {
-    url: "/playlists",
+    url: "/question/category",
     views: {
       'menuContent': {
         templateUrl: "templates/questionCategories.html",
@@ -67,5 +68,5 @@ angular.module('quizApp', ['ionic', 'quizApp.controllers'])
     }
   });
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/playlists');
+  $urlRouterProvider.otherwise('/app/question/category');
 });
