@@ -113,18 +113,27 @@ angular.module('quizApp.controllers', [])
   // var mytimeout = $timeout($scope.onTimeout,1000);
 
   $scope.clock = "loading clock..."; // initialise the time variable
-    $scope.tickInterval = 1000 //ms
+    // $scope.testNotStart =
+    $scope.time = 1000*60*10;
 
-    var tick = function() {
-        $scope.clock = Date.now() // get the current time
-        $timeout(tick, $scope.tickInterval); // reset the timer
-    }
 
-    // Start the timer
-    $timeout(tick, $scope.tickInterval);
+    $scope.startTest = function() {
+      $scope.time = $scope.time - 1000;
+      $timeout($scope.startTest, 1000);
+    };
+
 
   $scope.QueCategoryListForTest = questionCategoryListApi.getQueCatList;
 
+    // $scope.tickInterval = 1000 //ms
+
+    // var tick = function() {
+    //     $scope.clock = Date.now() // get the current time
+    //     $timeout(tick, $scope.tickInterval); // reset the timer
+    // }
+
+    // // Start the timer
+    // $timeout(tick, $scope.tickInterval);
 
 }).
 filter('startFrom', function() {

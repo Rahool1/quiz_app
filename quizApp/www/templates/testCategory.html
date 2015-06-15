@@ -1,6 +1,10 @@
 <ion-view view-title="Category">
   <ion-content>
-    <p>{{ clock | date:'mm:ss'}}</p>
-    <button class="button button-energized button-full"> Start</button>
+    <!-- <p>{{ clock | date:'mm:ss'}}</p> -->
+    <div ng-show="testNotStart">
+        <h2 class="title">{{time}}</h2>
+        <p>{{clock | date:'mm:ss'}}</p>
+        <button class="button button-energized button-full" ng-click="startTest()"> Start</button>
+    </div>
   </ion-content>
 </ion-view>
