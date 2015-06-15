@@ -48,7 +48,7 @@ angular.module('quizApp.controllers', [])
 
 })
 
-.controller('QuestionCtrl', function($scope, $stateParams, questionListApi, $ionicSlideBoxDelegate, $ionicPopup, $timeout) {
+.controller('QuestionCtrl', function($scope, $stateParams, questionListApi, $ionicSlideBoxDelegate, $ionicPopup, $timeout, $ionicScrollDelegate) {
   $scope.correctAns = false;
   $scope.wrongAns = false;
 
@@ -78,10 +78,11 @@ angular.module('quizApp.controllers', [])
 
     if(option.opt != que.ans){
       $scope.showAlert(que.ans);
-      // for(var i = 0; i < que.optionsList.length; i++){
-
-      // }
     }
+
+    $scope.scrollTop = function() {
+      $ionicScrollDelegate.scrollTop();
+    };
 
   };
 
