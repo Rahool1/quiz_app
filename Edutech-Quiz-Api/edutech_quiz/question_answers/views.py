@@ -29,18 +29,41 @@ def send_categories(request):
 def send_question_on_category(request):
 	# dataDictionary = json.loads(request.body)
 	# id = dataDictionary['id']
-	id = 2
-	category = Category.objects.get(id=id)
-	quiz_objects = Quiz.objects.filter(category=category)
-	que_ans_list = []
-	for obj in quiz_objects:
-		quiz_obj = {'question': obj.question, 'answer': obj.answer, 'direction_text': obj.directionText}
-		options = obj.options.all()
-		option_list = []
-		for option in options:
-			option_list.append(option.option)
+    id = 30
+    category = Category.objects.get(id=id)
+    quiz_objects = Quiz.objects.filter(category=category)
+    que_ans_list = []
+    direction_text_id_list = []
+    [direction_text_id_list.append(i.directionText.id) for i in quiz_objects if i.directionText != None if i.directionText.id not in direction_text_id_list]
+    print 'direction_text_id_list-->', direction_text_id_list
+    if len(direction_text_id_list) != 0:
+        for dir_text_id in direction_text_id_list:
+            questions_obj = {'direction_text': Direction_Text.objects.get(id=dir_text_id).directionText}
+            questions_obj_list = []
+            for obj in quiz_objects.filter(directionText__id=dir_text_id):
+                quiz_obj = {'question': obj.question, 'answer': obj.answer}
+                options = obj.options.all()
+                option_list = []
+                for option in options:
+                    option_list.append(option.option)
 
-		quiz_obj.update({'options': option_list})
-		que_ans_list.append(quiz_obj)
+                quiz_obj.update({'options': option_list})
+                questions_obj_list.append(quiz_obj)
+                questions_obj.update({'questions': questions_obj_list})
+            que_ans_list.append(questions_obj)
+    else:
+        questions_obj = {'direction_text': None}
+        questions_obj_list = []
+        for obj in quiz_objects:
+            quiz_obj = {'question': obj.question, 'answer': obj.answer}
+            options = obj.options.all()
+            option_list = []
+            for option in options:
+                option_list.append(option.option)
 
-	return HttpResponse(json.dumps(que_ans_list), content_type="application/json")
+            quiz_obj.update({'options': option_list})
+            questions_obj_list.append(quiz_obj)
+            questions_obj.update({'questions': questions_obj_list})
+        que_ans_list.append(questions_obj)
+
+    return HttpResponse(json.dumps(que_ans_list), content_type="application/json")
