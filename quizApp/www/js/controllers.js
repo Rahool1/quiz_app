@@ -1,6 +1,6 @@
 angular.module('quizApp.controllers', [])
 
-.controller('quizCtrl', function($scope, $ionicModal, $timeout) {
+.controller('quizCtrl', function($scope, $ionicModal, $timeout, $state) {
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -41,9 +41,37 @@ angular.module('quizApp.controllers', [])
   };
 })
 
-.controller('QuestionCategoryCtrl', function($scope,questionCategoryListApi) {
+.controller('QuestionCategoryCtrl', function($scope,questionCategoryListApi,$state) {
 
   $scope.QueCategoryList = questionCategoryListApi.getQueCatList;
+
+  $scope.categorySelected = function(cat) {
+    if(cat.child == null){
+      //goto question page
+      $state.go('app.single',{categoryId:cat.id});
+    }else{
+      $state.go('app.queCategory.subCategory',{catId:cat.id});
+      //goto second level
+    }
+  };
+
+})
+
+.controller('subQuestionCategoryCtrl', function($scope,$stateParams,$state,subQueCategory) {
+  console.log("subQuestionCategoryCtrl called");
+  $scope.QueSubCategoryList = subQueCategory.getSubQueCatList($stateParams.catId);
+  console.log("List");
+  console.log($scope.QueSubCategoryList);
+
+  $scope.categorySelected = function(cat) {
+    if(cat.child == null){
+      //goto question page
+      $state.go('app.single',{categoryId:cat.id});
+    }else{
+      $state.go('app.queCategory.subCategory',{catId:cat.id});
+      //goto second level
+    }
+  };
 
 
 })

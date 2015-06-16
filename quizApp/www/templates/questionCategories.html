@@ -1,12 +1,10 @@
+ <!-- href="#/app/questions/{{subCat.id}}" -->
 <ion-view view-title="Categories">
   <ion-content>
     <ion-list>
     <div ng-repeat="cat in QueCategoryList">
-      <ion-item class="item item-divider item-calm">
-        {{cat.divisionName}}
-      </ion-item>
-      <ion-item class="item-icon-right" ng-repeat="subCat in cat.category" href="#/app/questions/{{subCat.id}}">
-        {{subCat.title}}
+      <ion-item class="item-icon-right" ng-click="categorySelected(cat)" ng-show="cat.parent == null">
+        {{cat.name}}
         <i class="icon ion-chevron-right icon-accessory"></i>
       </ion-item>
     </div>

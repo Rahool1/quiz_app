@@ -48,12 +48,21 @@ angular.module('quizApp', ['ionic', 'quizApp.controllers'])
       }
     }
   })
-  .state('app.playlists', {
+  .state('app.queCategory', {
     url: "/question/category",
     views: {
       'menuContent': {
         templateUrl: "templates/questionCategories.html",
         controller: 'QuestionCategoryCtrl'
+      }
+    }
+  })
+  .state('app.queCategory.subCategory', {
+    url: "/subCategory/:catId",
+    views: {
+      'menuContent@app': {
+        templateUrl: "templates/questionSubCategories.html",
+        controller: 'subQuestionCategoryCtrl'
       }
     }
   })

@@ -1,0 +1,12 @@
+<ion-view view-title="SubCategories">
+  <ion-content>
+    <ion-list>
+    <div ng-repeat="cat in QueSubCategoryList">
+      <ion-item class="item-icon-right" ng-click="categorySelected(cat)">
+        {{cat.name}}
+        <i class="icon ion-chevron-right icon-accessory"></i>
+      </ion-item>
+    </div>
+    </ion-list>
+  </ion-content>
+</ion-view>
