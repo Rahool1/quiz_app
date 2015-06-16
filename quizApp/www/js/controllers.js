@@ -104,21 +104,14 @@ angular.module('quizApp.controllers', [])
 })
 .controller('TestCtrl', function($scope, questionCategoryListApi, $timeout) {
 
-  // $scope.ss = 0;
-  // $scope.mm = 0;
 
-  // $scope.onTimeout = function(){
-  //     $scope.counter++;
-  //     mytimeout = $timeout($scope.onTimeout,1000);
-  // }
-  // var mytimeout = $timeout($scope.onTimeout,1000);
-
-  $scope.clock = "loading clock..."; // initialise the time variable
-    // $scope.testNotStart =
+    $scope.clock = "loading clock..."; // initialise the time variable
+    $scope.testNotStart = true;
     $scope.time = 1000*60*10;
 
 
     $scope.startTest = function() {
+      $scope.testNotStart = false;
       $scope.time = $scope.time - 1000;
       $timeout($scope.startTest, 1000);
     };
