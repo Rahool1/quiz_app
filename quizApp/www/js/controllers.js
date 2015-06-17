@@ -79,7 +79,6 @@ angular.module('quizApp.controllers', [])
 .controller('QuestionCtrl', function($scope, $stateParams, questionListApi, $ionicSlideBoxDelegate, $ionicPopup, $timeout, $ionicScrollDelegate) {
   $scope.currentPage = 0;
   $scope.pageSize = 50;
-  $scope.directionTextNotPresent = false;
 
   $scope.data = {
     selected: null
@@ -87,11 +86,6 @@ angular.module('quizApp.controllers', [])
 
   $scope.questionData = questionListApi.getQuestionListData($stateParams.categoryId);
 
-  if($scope.questionData.length == 1){
-    if($scope.questionData[0].direction_text == null){
-      $scope.directionTextNotPresent = true;
-    }
-  }
 
   $scope.numberOfPages=function(){
     return Math.ceil($scope.questionData.length/$scope.pageSize);

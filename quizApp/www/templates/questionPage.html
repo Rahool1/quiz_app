@@ -2,9 +2,10 @@
 <!-- pagination -->
 <ion-view view-title="Questions">
   <ion-content>
-    <div  ng-repeat="que in questionData"
-      ng-show="que.direction_text == null">
-
+    <div  ng-repeat="que in questionData">
+        <div class="item item-divider item-royal item-text-wrap padding" ng-show="que.direction_text != null">
+          <span style="font-size:1.3em;">{{que.direction_text}}</span>
+        </div>
       <div ng-repeat="q in que.questions">
 
       <div class="card">
