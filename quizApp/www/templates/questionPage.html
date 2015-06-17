@@ -1,6 +1,8 @@
+<!-- | startFrom:currentPage*pageSize | limitTo:pageSize -->
+<!-- pagination -->
 <ion-view view-title="Questions">
   <ion-content>
-    <div  ng-repeat="que in questionData | startFrom:currentPage*pageSize | limitTo:pageSize"
+    <div  ng-repeat="que in questionData"
       ng-show="que.direction_text == null">
 
       <div ng-repeat="q in que.questions">
@@ -20,7 +22,7 @@
           <div class="list">
             <div ng-repeat="option in q.options">
 
-              <label class="item item-radio" ng-click="radioButtonIsSelected($index + 1,q,option)">
+              <label class="item item-radio" ng-click="radioButtonIsSelected($index,q,option)">
                 <input type="radio" name="group">
                 <div class="item-content">
                   <div class="row">
@@ -32,9 +34,9 @@
                     </div>
                   </div>
                 </div>
-                <i class="radio-icon ion-checkmark-round" ng-show="($index + 1) == q.answer"
+                <i class="radio-icon ion-checkmark-round" ng-show="$index == q.answer"
                 style="padding-top: 25px;"></i>
-                <i class="radio-icon ion-close-round" ng-show="($index + 1) != q.answer"
+                <i class="radio-icon ion-close-round" ng-show="$index != q.answer"
                 style="padding-top: 25px;"></i>
               </label>
 
@@ -47,11 +49,11 @@
 
     </div>
   </ion-content>
-  <div class="bar bar-footer bar-balanced">
+  <!-- <div class="bar bar-footer bar-balanced">
     <div class="button-bar">
       <button class="button button-clear" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1;scrollTop()">Prev</button>
-      <button class="button button-clear">{{currentPage+1}}/{{numberOfPages()}}</button>
-      <button class="button button-clear" ng-disabled="currentPage >= questionData.length/(pageSize + 1)" ng-click="currentPage = currentPage + 1;scrollTop()">Next</button>
+      <button class="button button-clear">{{currentPage+1}}/{{numberOfPages()}} {{questionData.length}}</button>
+      <button class="button button-clear" ng-disabled="currentPage >= questionData.questions.length/(pageSize + 1)" ng-click="currentPage = currentPage + 1;scrollTop()">Next</button>
     </div>
-  </div>
+  </div> -->
 </ion-view>

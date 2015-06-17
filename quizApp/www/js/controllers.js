@@ -78,15 +78,20 @@ angular.module('quizApp.controllers', [])
 
 .controller('QuestionCtrl', function($scope, $stateParams, questionListApi, $ionicSlideBoxDelegate, $ionicPopup, $timeout, $ionicScrollDelegate) {
   $scope.currentPage = 0;
-  $scope.pageSize = 10;
+  $scope.pageSize = 50;
+  $scope.directionTextNotPresent = false;
 
   $scope.data = {
     selected: null
   };
 
   $scope.questionData = questionListApi.getQuestionListData($stateParams.categoryId);
-  console.log("data");
-  console.log($scope.questionData);
+
+  if($scope.questionData.length == 1){
+    if($scope.questionData[0].direction_text == null){
+      $scope.directionTextNotPresent = true;
+    }
+  }
 
   $scope.numberOfPages=function(){
     return Math.ceil($scope.questionData.length/$scope.pageSize);
@@ -99,7 +104,7 @@ angular.module('quizApp.controllers', [])
     console.log(que);
     var ansToAlert = "";
     for(var i = 0;i < que.options.length;i++){
-      if(i+1 == que.answer){
+      if(i == que.answer){
         ansToAlert = que.options[i];
       }
     }
