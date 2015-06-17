@@ -1,42 +1,50 @@
 <ion-view view-title="Questions">
   <ion-content>
-    <div  ng-repeat="que in questionData | startFrom:currentPage*pageSize | limitTo:pageSize">
+    <div  ng-repeat="que in questionData | startFrom:currentPage*pageSize | limitTo:pageSize"
+      ng-show="que.direction_text == null">
+
+      <div ng-repeat="q in que.questions">
+
       <div class="card">
         <div class="item item-divider item-calm item-text-wrap" style="padding:0px;">
-          <!-- {{que.question}} -->
           <div class="row">
             <div class="col-5 padding">
-              Q.{{que.sr_no + 1}}
+              Q.{{$index + 1}}
             </div>
             <div class="col padding">
-              <p style="color:#FFF;font-size:1.2em;">{{que.question}}</p>
+              <p style="color:#FFF;font-size:1.2em;">{{q.question}}</p>
             </div>
           </div>
         </div>
         <div class="item item-text-wrap">
           <div class="list">
-            <div ng-repeat="option in que.optionsList">
+            <div ng-repeat="option in q.options">
 
-              <label class="item item-radio" ng-click="radioButtonIsSelected(option,que)">
+              <label class="item item-radio" ng-click="radioButtonIsSelected($index + 1,q,option)">
                 <input type="radio" name="group">
                 <div class="item-content">
                   <div class="row">
-                    <div class="col-10" style="padding:6px;">
-                      {{option.id + 1}}
+                    <div class="col-5 padding" style="border-right: 2px solid #EEE;">
+                      {{$index + 1}}
                     </div>
-                    <div class="col">
-                      {{option.opt}}
+                    <div class="col padding" style="border: 2px solid #CCC;">
+                      <span>{{option}}</span>
                     </div>
                   </div>
                 </div>
-                <i class="radio-icon ion-checkmark-round" ng-show="option.opt == que.ans"></i>
-                <i class="radio-icon ion-close-round" ng-show="option.opt != que.ans"></i>
+                <i class="radio-icon ion-checkmark-round" ng-show="($index + 1) == q.answer"
+                style="padding-top: 25px;"></i>
+                <i class="radio-icon ion-close-round" ng-show="($index + 1) != q.answer"
+                style="padding-top: 25px;"></i>
               </label>
 
             </div>
           </div>
         </div>
       </div>
+
+      </div>  <!-- question ng-repepat -->
+
     </div>
   </ion-content>
   <div class="bar bar-footer bar-balanced">

@@ -77,9 +77,6 @@ angular.module('quizApp.controllers', [])
 })
 
 .controller('QuestionCtrl', function($scope, $stateParams, questionListApi, $ionicSlideBoxDelegate, $ionicPopup, $timeout, $ionicScrollDelegate) {
-  $scope.correctAns = false;
-  $scope.wrongAns = false;
-
   $scope.currentPage = 0;
   $scope.pageSize = 10;
 
@@ -97,15 +94,18 @@ angular.module('quizApp.controllers', [])
 
   console.log(Math.ceil($scope.questionData.length/$scope.pageSize));
 
-  $scope.radioButtonIsSelected = function(option,que) {
-    // console.log("options");
+  $scope.radioButtonIsSelected = function(index,que,option) {
+
     console.log(que);
-    console.log(option);
-    console.log(que.ans);
+    var ansToAlert = "";
+    for(var i = 0;i < que.options.length;i++){
+      if(i+1 == que.answer){
+        ansToAlert = que.options[i];
+      }
+    }
 
-
-    if(option.opt != que.ans){
-      $scope.showAlert(que.ans);
+    if(index != que.answer){
+      $scope.showAlert(ansToAlert);
     }
 
     $scope.scrollTop = function() {
