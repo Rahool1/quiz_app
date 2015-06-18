@@ -2,7 +2,7 @@
   'use strict';
   angular.module('quizApp').factory('questionCategoryListApi',['$http',questionCategoryListApi]);
 
-  function questionCategoryListApi($http){
+  function questionCategoryListApi($http,ApiEndpoint){
 
     var queCatList = [
 
@@ -815,10 +815,10 @@
 ];
 
     function getQueCatList(){
-      // return $http({method:"GET", url:"http://127.0.0.1:4444/quiz/send/category/"}).then(function(result){
-      //     return result.data;
-      // });
-      return queCatList;
+      return $http({method:"GET", url:"http://quizapp.contrailtech.com/quiz/send/category/"}).then(function(result){
+          return result.data;
+      });
+      // return queCatList;
 
     };
 
