@@ -43,7 +43,11 @@ angular.module('quizApp.controllers', [])
 
 .controller('QuestionCategoryCtrl', function($scope,questionCategoryListApi,$state) {
 
-  $scope.QueCategoryList = questionCategoryListApi.getQueCatList;
+  $scope.QueCategoryList = null;
+  questionCategoryListApi.getQueCatList()
+  .then(function(result) {
+    $scope.QueCategoryList = result;
+  });
 
   $scope.categorySelected = function(cat) {
     if(cat.child == null){

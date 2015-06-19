@@ -5,9 +5,9 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
 angular.module('quizApp', ['ionic', 'quizApp.controllers'])
-// .constant('ApiEndpoint', {
-//   url: 'http://quizapp.contrailtech.com/quiz/send/category/'
-// })
+.constant('ApiEndpoint', {
+  url: 'http://127.0.0.1:8888'
+})
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard

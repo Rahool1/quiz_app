@@ -1,9 +1,9 @@
 (function(){
   'use strict';
-  angular.module('quizApp').factory('questionCategoryListApi',['$http',questionCategoryListApi]);
+  angular.module('quizApp').factory('questionCategoryListApi',['$http','$q','ApiEndpoint',questionCategoryListApi]);
 
-  function questionCategoryListApi($http,ApiEndpoint){
-
+  function questionCategoryListApi($http,$q,ApiEndpoint){
+    console.log(ApiEndpoint);
     var queCatList = [
 
 {
@@ -814,16 +814,26 @@
 
 ];
 
-    function getQueCatList(){
-      return $http({method:"GET", url:"http://quizapp.contrailtech.com/quiz/send/category/"}).then(function(result){
-          return result.data;
-      });
-      // return queCatList;
+    var getQueCatList = function() {
+      var q = $q.defer();
 
+      $http.get(ApiEndpoint.url+'/quiz/send/category/')
+        .success(function(data) {
+          console.log('Got some data: ', data);
+          queCatList = data;
+          q.resolve(data);
+        })
+        .error(function(error){
+          console.log('Had an error');
+          console.log(error);
+          q.reject(error);
+        })
+
+        return q.promise;
     };
 
     return{
-      getQueCatList:getQueCatList()
+      getQueCatList:getQueCatList
     };
 
   };
