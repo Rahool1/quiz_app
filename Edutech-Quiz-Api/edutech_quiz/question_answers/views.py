@@ -27,9 +27,10 @@ def send_categories(request):
     return HttpResponse(json.dumps(list_data), content_type="application/json")
 
 def send_question_on_category(request):
-	# dataDictionary = json.loads(request.body)
-	# id = dataDictionary['id']
-    id = 30
+    print request.body
+    dataDictionary = json.loads(request.body)
+    id = dataDictionary['id']
+    # id = 50
     category = Category.objects.get(id=id)
     quiz_objects = Quiz.objects.filter(category=category)
     que_ans_list = []
@@ -44,12 +45,12 @@ def send_question_on_category(request):
                 quiz_obj = {'question': obj.question, 'answer': obj.answer}
                 options = obj.options.all()
                 option_list = []
-                for option in options:
-                    option_list.append(option.option)
+            for option in options:
+                option_list.append(option.option)
 
-                quiz_obj.update({'options': option_list})
-                questions_obj_list.append(quiz_obj)
-                questions_obj.update({'questions': questions_obj_list})
+            quiz_obj.update({'options': option_list})
+            questions_obj_list.append(quiz_obj)
+            questions_obj.update({'questions': questions_obj_list})
             que_ans_list.append(questions_obj)
     else:
         questions_obj = {'direction_text': None}
@@ -64,6 +65,6 @@ def send_question_on_category(request):
             quiz_obj.update({'options': option_list})
             questions_obj_list.append(quiz_obj)
             questions_obj.update({'questions': questions_obj_list})
-        que_ans_list.append(questions_obj)
+            que_ans_list.append(questions_obj)
 
     return HttpResponse(json.dumps(que_ans_list), content_type="application/json")

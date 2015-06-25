@@ -820,7 +820,6 @@
       $http.get(ApiEndpoint.url+'/quiz/send/category/')
         .success(function(data) {
           console.log('Got some data: ', data);
-          queCatList = data;
           q.resolve(data);
         })
         .error(function(error){

@@ -1,8 +1,8 @@
 (function(){
   'use strict';
-  angular.module('quizApp').factory('questionListApi',[questionListApi]);
+  angular.module('quizApp').factory('questionListApi',['$http','$q','ApiEndpoint',questionListApi]);
 
-  function questionListApi(){
+  function questionListApi($http,$q,ApiEndpoint){
 
     var questionList = [
 
@@ -518,7 +518,21 @@
 
     function getQuestionListData(id) {
         console.log(id);
-        return questionList;
+        var q = $q.defer();
+
+        $http.post(ApiEndpoint.url+'/quiz/send/question/',{id:id})
+        .success(function(data) {
+          console.log('Got some data: ', data);
+          q.resolve(data);
+        })
+        .error(function(error){
+          console.log('Had an error');
+          console.log(error);
+          q.reject(error);
+        })
+
+        return q.promise;
+
     };
     return{
       getQuestionListData:getQuestionListData

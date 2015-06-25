@@ -90,6 +90,12 @@ angular.module('quizApp.controllers', [])
 
   $scope.questionData = questionListApi.getQuestionListData($stateParams.categoryId);
 
+  $scope.questionData = null;
+  questionListApi.getQuestionListData($stateParams.categoryId)
+  .then(function(result) {
+    $scope.questionData = result;
+  });
+
 
   $scope.numberOfPages=function(){
     return Math.ceil($scope.questionData.length/$scope.pageSize);

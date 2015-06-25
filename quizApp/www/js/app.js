@@ -6,7 +6,7 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('quizApp', ['ionic', 'quizApp.controllers'])
 .constant('ApiEndpoint', {
-  url: 'http://127.0.0.1:8888'
+  url: 'http://quizapp.contrailtech.com'
 })
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
