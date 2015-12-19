@@ -1,2 +1,2 @@
-# quiz_app
-simple quiz app
+# quiz_app 
+simple quiz app using Ionic and python
